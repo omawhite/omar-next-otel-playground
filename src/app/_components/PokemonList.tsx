@@ -25,16 +25,16 @@ export default function PokemonList() {
   return (
     <div className="w-full max-w-6xl mx-auto">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 text-center sm:text-right">Pokémon #1 - {pokemonCount}</h2>
+        <h2 className="text-2xl font-bold text-foreground text-center sm:text-right">Pokémon #1 - {pokemonCount}</h2>
         <div className="mb-4 sm:mb-0">
-          <label htmlFor={selectId} className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor={selectId} className="block text-sm font-medium text-foreground mb-2">
             Number of Pokemon to display:
           </label>
           <select
             id={selectId}
             value={pokemonCount}
             onChange={(e) => setPokemonCount(Number(e.target.value))}
-            className="block w-full max-w-xs px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="block w-full max-w-xs px-3 py-2 bg-background text-foreground border border-input rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring sm:text-sm"
           >
             {countOptions.map((option) => (
               <option key={option} value={option}>
@@ -59,14 +59,14 @@ export default function PokemonList() {
               {isLoading ? (
                 <Card className="aspect-square">
                   <CardContent className="flex flex-col items-center justify-center h-full">
-                    <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600 mb-2" />
-                    <span className="text-gray-500 text-sm text-center">Loading...</span>
+                    <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-primary mb-2" />
+                    <span className="text-muted-foreground text-sm text-center">Loading...</span>
                   </CardContent>
                 </Card>
               ) : isError ? (
                 <Card className="aspect-square">
                   <CardContent className="flex flex-col items-center justify-center h-full">
-                    <span className="text-red-600 text-sm text-center">Error loading Pokemon #{index + 1}</span>
+                    <span className="text-destructive text-sm text-center">Error loading Pokemon #{index + 1}</span>
                   </CardContent>
                 </Card>
               ) : data ? (
@@ -74,7 +74,7 @@ export default function PokemonList() {
                   href={`/pokemon/${id}`}
                   className="block aspect-square"
                 >
-                  <Card className="h-full hover:shadow-md hover:border-blue-300 transition-all duration-200">
+                  <Card className="h-full hover:shadow-md hover:border-primary/50 transition-all duration-200">
                     <CardContent className="flex flex-col items-center justify-center h-full">
                       <div className="shrink-0 mb-3">
                         {pokemonImage ? (
@@ -86,8 +86,8 @@ export default function PokemonList() {
                             className="w-20 h-20 object-contain"
                           />
                         ) : (
-                          <div className="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center">
-                            <span className="text-gray-400 text-xs">No Image</span>
+                          <div className="w-20 h-20 bg-muted rounded-lg flex items-center justify-center">
+                            <span className="text-muted-foreground text-xs">No Image</span>
                           </div>
                         )}
                       </div>
@@ -101,7 +101,7 @@ export default function PokemonList() {
               ) : (
                 <Card className="aspect-square">
                   <CardContent className="flex items-center justify-center h-full">
-                    <span className="text-gray-500 text-sm">No data available</span>
+                    <span className="text-muted-foreground text-sm">No data available</span>
                   </CardContent>
                 </Card>
               )}
