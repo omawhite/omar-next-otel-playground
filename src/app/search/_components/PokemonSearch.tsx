@@ -1,7 +1,7 @@
 'use client';
 
 import AlertBar from '@/components/AlertBar/AlertBar';
-import Button from '@/components/Button/Button';
+import { Button } from '@/components/ui/button';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import useGetPokemonQuery from '@/queries/useGetPokemonQuery';
