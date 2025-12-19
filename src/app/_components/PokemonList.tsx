@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useId, useState } from 'react';
 import usePokemonListQuery from '@/queries/usePokemonListQuery';
+import { Card, CardContent, CardTitle, CardDescription } from '@/components/ui/card';
 
 /**
  * Demonstrates how to use React Query to fetch multiple Pokémon.
@@ -56,51 +57,53 @@ export default function PokemonList() {
           return (
             <div key={key}>
               {isLoading ? (
-                <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm aspect-square">
-                  <div className="flex flex-col items-center justify-center h-full">
+                <Card className="aspect-square">
+                  <CardContent className="flex flex-col items-center justify-center h-full">
                     <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600 mb-2" />
                     <span className="text-gray-500 text-sm text-center">Loading...</span>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               ) : isError ? (
-                <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm aspect-square">
-                  <div className="flex flex-col items-center justify-center h-full">
+                <Card className="aspect-square">
+                  <CardContent className="flex flex-col items-center justify-center h-full">
                     <span className="text-red-600 text-sm text-center">Error loading Pokemon #{index + 1}</span>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               ) : data ? (
                 <Link
                   href={`/pokemon/${id}`}
-                  className="block bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-200 aspect-square"
+                  className="block aspect-square"
                 >
-                  <div className="flex flex-col items-center justify-center h-full">
-                    <div className="flex-shrink-0 mb-3">
-                      {pokemonImage ? (
-                        <Image
-                          src={pokemonImage}
-                          alt={name || 'Pokemon'}
-                          width={80}
-                          height={80}
-                          className="w-20 h-20 object-contain"
-                        />
-                      ) : (
-                        <div className="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center">
-                          <span className="text-gray-400 text-xs">No Image</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="text-center">
-                      <div className="font-medium text-gray-900 capitalize text-sm mb-1">{name}</div>
-                      <div className="text-xs text-gray-500">#{id}</div>
-                    </div>
-                  </div>
+                  <Card className="h-full hover:shadow-md hover:border-blue-300 transition-all duration-200">
+                    <CardContent className="flex flex-col items-center justify-center h-full">
+                      <div className="shrink-0 mb-3">
+                        {pokemonImage ? (
+                          <Image
+                            src={pokemonImage}
+                            alt={name || 'Pokemon'}
+                            width={80}
+                            height={80}
+                            className="w-20 h-20 object-contain"
+                          />
+                        ) : (
+                          <div className="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center">
+                            <span className="text-gray-400 text-xs">No Image</span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="text-center">
+                        <CardTitle className="capitalize text-sm mb-1">{name}</CardTitle>
+                        <CardDescription className="text-xs">#{id}</CardDescription>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </Link>
               ) : (
-                <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm aspect-square">
-                  <div className="flex items-center justify-center h-full">
+                <Card className="aspect-square">
+                  <CardContent className="flex items-center justify-center h-full">
                     <span className="text-gray-500 text-sm">No data available</span>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               )}
             </div>
           );
