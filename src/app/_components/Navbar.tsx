@@ -1,5 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuLink,
+} from '@/components/ui/navigation-menu';
 
 export default function Navbar() {
   return (
@@ -15,14 +21,24 @@ export default function Navbar() {
           />
           <span className="text-xl font-bold text-gray-900">Omar's Pokedex</span>
         </Link>
-        <div className="flex gap-6">
-          <Link href="/" className="text-blue-600 hover:text-blue-800 underline text-lg font-medium">
-            Home
-          </Link>
-          <Link href="/search" className="text-blue-600 hover:text-blue-800 underline text-lg font-medium">
-            Search
-          </Link>
-        </div>
+        <NavigationMenu viewport={false}>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild>
+                <Link href="/" className="text-blue-600 hover:text-blue-800 underline text-lg font-medium">
+                  Home
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild>
+                <Link href="/search" className="text-blue-600 hover:text-blue-800 underline text-lg font-medium">
+                  Search
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
       </div>
     </nav>
   );
