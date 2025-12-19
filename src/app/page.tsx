@@ -9,12 +9,8 @@ export default function Home() {
     <div className="flex flex-col justify-center items-center min-h-screen px-2">
       <main className="flex flex-1 flex-col justify-center items-center py-5">
         <Header logoImgSrc="/images/pokeball.svg" logoLink={POKEMON_HOME_URL} />
-        <h1 className="m-0 text-heading-xxxl leading-heading text-center text-[#2A75BB]">
-          Welcome to the{' '}
-          <Link href={POKEMON_HOME_URL} className="text-heading-xxxl text-[#2A75BB] underline">
-            Pokemon
-          </Link>{' '}
-          Demo Site!
+        <h1 className="m-0 text-heading-xxxl leading-heading text-center text-primary">
+          Welcome to Omar's Pokedex!
         </h1>
         <br />
         <div className="flex justify-center mb-8">
