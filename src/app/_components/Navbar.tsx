@@ -6,6 +6,7 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
 } from '@/components/ui/navigation-menu';
+import { ModeToggle } from '@/components/theme-toggle';
 
 export default function Navbar() {
   return (
@@ -21,24 +22,27 @@ export default function Navbar() {
           />
           <span className="text-xl font-bold text-gray-900">Omar's Pokedex</span>
         </Link>
-        <NavigationMenu viewport={false}>
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              <NavigationMenuLink asChild>
-                <Link href="/" className="text-blue-600 hover:text-blue-800 underline text-lg font-medium">
-                  Home
-                </Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuLink asChild>
-                <Link href="/search" className="text-blue-600 hover:text-blue-800 underline text-lg font-medium">
-                  Search
-                </Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
+        <div className="flex items-center gap-4">
+          <NavigationMenu viewport={false}>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link href="/" className="text-blue-600 hover:text-blue-800 underline text-lg font-medium">
+                    Home
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link href="/search" className="text-blue-600 hover:text-blue-800 underline text-lg font-medium">
+                    Search
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+          <ModeToggle />
+        </div>
       </div>
     </nav>
   );
