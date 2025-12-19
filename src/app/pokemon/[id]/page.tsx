@@ -30,7 +30,7 @@ export default async function PokemonDetailsPage({ params }: PokemonDetailsPageP
     <div className="flex flex-col justify-center items-center min-h-screen px-2">
       <main className="flex flex-1 flex-col justify-center items-center py-20">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Pokémon Details</h1>
+          <h1 className="text-4xl font-bold text-foreground mb-4">Pokémon Details</h1>
         </div>
 
         <div className="w-full max-w-4xl">

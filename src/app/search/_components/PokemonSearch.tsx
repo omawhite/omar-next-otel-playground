@@ -75,7 +75,7 @@ function PokemonSearch({ initialSearchTerm = '' }: PokemonSearchProps) {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="Enter Pokémon name or number..."
-          className="flex-1 max-w-sm px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="flex-1 max-w-sm px-4 py-2 bg-background text-foreground border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
         />
         <div className="flex gap-2 shrink-0">
           <Button type="submit" className="bg-[#DC0A2D] text-white rounded-lg text-lg font-semibold hover:bg-[#B00822] transition-colors shadow-lg">Search</Button>
@@ -90,8 +90,8 @@ function PokemonSearch({ initialSearchTerm = '' }: PokemonSearchProps) {
       <div className="">
         {pokemonQuery.isLoading && (
           <div className="text-center py-8">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
-            <p className="mt-2 text-gray-600">Loading Pokémon...</p>
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+            <p className="mt-2 text-muted-foreground">Loading Pokémon...</p>
           </div>
         )}
 
@@ -107,8 +107,8 @@ function PokemonSearch({ initialSearchTerm = '' }: PokemonSearchProps) {
 
         {!searchTerm && !pokemonQuery.isLoading && !pokemonQuery.isError && (
           <div className="text-center py-8">
-            <p className="text-gray-600">Enter a Pokémon name or number to get started!</p>
-            <p className="text-sm text-gray-500 mt-2">Try searching for "pikachu", "charizard", or "25"</p>
+            <p className="text-muted-foreground">Enter a Pokémon name or number to get started!</p>
+            <p className="text-sm text-muted-foreground/70 mt-2">Try searching for "pikachu", "charizard", or "25"</p>
           </div>
         )}
       </div>
