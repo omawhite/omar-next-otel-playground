@@ -1,0 +1,119 @@
+'use client';
+
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import useGetPokemonQuery from '@/queries/useGetPokemonQuery';
+import { PokemonCard } from './PokemonCard';
+
+interface PokemonSearchProps {
+  /**
+   * Initial search term to populate the search input
+   */
+  initialSearchTerm?: string;
+}
+
+/**
+ * A search interface for finding Pokémon by name or ID number. Demonstrates how to use React Query to fetch a single Pokémon.
+ */
+function PokemonSearch({ initialSearchTerm = '' }: PokemonSearchProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [inputValue, setInputValue] = useState(initialSearchTerm);
+  const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
+
+  const pokemonQuery = useGetPokemonQuery(searchTerm);
+
+  // Update both input and search term when initialSearchTerm changes (e.g., from URL params)
+  useEffect(() => {
+    if (initialSearchTerm) {
+      setInputValue(initialSearchTerm);
+      setSearchTerm(initialSearchTerm);
+    } else {
+      // Clear search when no initial term (URL was cleared)
+      setInputValue('');
+      setSearchTerm('');
+    }
+  }, [initialSearchTerm]);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (inputValue.trim()) {
+      const trimmedQuery = inputValue.trim();
+      setSearchTerm(trimmedQuery);
+
+      // Update URL with the search term
+      const params = new URLSearchParams(searchParams);
+      // Check if the query looks like a number
+      const isNumeric = /^\d+$/.test(trimmedQuery);
+
+      if (isNumeric) {
+        params.set('id', trimmedQuery);
+        params.delete('name');
+      } else {
+        params.set('name', trimmedQuery);
+        params.delete('id');
+      }
+
+      router.push(`?${params.toString()}`);
+    }
+  };
+
+  const handleClear = () => {
+    setInputValue('');
+    setSearchTerm('');
+    // Clear URL parameters
+    router.push('/search');
+  };
+
+  return (
+    <div className="space-y-6">
+      <form onSubmit={handleSearch} className="flex flex-wrap gap-4 max-w-md mx-auto">
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          placeholder="Enter Pokémon name or number..."
+          className="flex-1 max-w-sm px-4 py-2 bg-background text-foreground border border-input rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+        />
+        <div className="flex gap-2 shrink-0">
+          <Button type="submit" className="bg-[#DC0A2D] text-white rounded-lg text-lg font-semibold hover:bg-[#B00822] transition-colors shadow-lg">Search</Button>
+          {searchTerm && (
+            <Button type="button" onClick={handleClear}>
+              Clear
+            </Button>
+          )}
+        </div>
+      </form>
+
+      <div className="">
+        {pokemonQuery.isLoading && (
+          <div className="text-center py-8">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+            <p className="mt-2 text-muted-foreground">Loading Pokémon...</p>
+          </div>
+        )}
+
+        {pokemonQuery.isError && (
+          <Alert variant="destructive" className="mb-4">
+            <AlertDescription>
+              {pokemonQuery.error instanceof Error ? pokemonQuery.error.message : 'Failed to fetch Pokémon data'}
+            </AlertDescription>
+          </Alert>
+        )}
+
+        {pokemonQuery.isSuccess && pokemonQuery.data && <PokemonCard pokemon={pokemonQuery.data} />}
+
+        {!searchTerm && !pokemonQuery.isLoading && !pokemonQuery.isError && (
+          <div className="text-center py-8">
+            <p className="text-muted-foreground">Enter a Pokémon name or number to get started!</p>
+            <p className="text-sm text-muted-foreground/70 mt-2">Try searching for "pikachu", "charizard", or "25"</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default PokemonSearch;
