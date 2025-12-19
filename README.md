@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+
+## About
+
+This is a Next.js playground application for testing out [OpenTelemetry](https://opentelemetry.io/). The app uses the [Poke API](https://pokeapi.co/) to fetch and display Pokémon data, providing a practical use case for implementing and testing OpenTelemetry instrumentation, tracing, and observability features.
 
 ## Getting Started
 
