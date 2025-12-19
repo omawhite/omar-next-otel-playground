@@ -78,7 +78,7 @@ function PokemonSearch({ initialSearchTerm = '' }: PokemonSearchProps) {
           className="flex-1 max-w-sm px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         <div className="flex gap-2 shrink-0">
-          <Button type="submit">Search</Button>
+          <Button type="submit" className="bg-[#DC0A2D] text-white rounded-lg text-lg font-semibold hover:bg-[#B00822] transition-colors shadow-lg">Search</Button>
           {searchTerm && (
             <Button type="button" onClick={handleClear}>
               Clear
