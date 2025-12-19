@@ -1,6 +1,6 @@
 'use client';
 
-import AlertBar from '@/components/AlertBar/AlertBar';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -95,9 +95,13 @@ function PokemonSearch({ initialSearchTerm = '' }: PokemonSearchProps) {
           </div>
         )}
 
-        <AlertBar isOpen={pokemonQuery.isError}>
-          {pokemonQuery.error instanceof Error ? pokemonQuery.error.message : 'Failed to fetch Pokémon data'}
-        </AlertBar>
+        {pokemonQuery.isError && (
+          <Alert variant="destructive" className="mb-4">
+            <AlertDescription>
+              {pokemonQuery.error instanceof Error ? pokemonQuery.error.message : 'Failed to fetch Pokémon data'}
+            </AlertDescription>
+          </Alert>
+        )}
 
         {pokemonQuery.isSuccess && pokemonQuery.data && <PokemonCard pokemon={pokemonQuery.data} />}
 
